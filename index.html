@@ -1,11 +1,157 @@
 <!DOCTYPE html>
-<html lang="gl">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Plantilla para sitios estáticos</title>
+    <title>Pesca Saúde. O noso mar faiche ben</title>
+    
+    <link rel="stylesheet" href="https://use.typekit.net/cfb3rae.css">
+
+    <style>
+        :root {
+            --bg-color: rgba(0, 166, 203, 0.5); 
+            --border-width: 4px; 
+            --main-font: "area-normal", sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            font-family: var(--main-font);
+            font-weight: 400;
+            color: #000;
+            margin: 0;
+            padding: 20px 20px ;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        h1, h2, .bold {
+            font-weight: 800;
+            letter-spacing: 1px;
+        }
+
+        .logo-container {
+            width: 100%;
+            max-width: 900px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+
+        .main-logo {
+            width: 100%;
+            object-fit: contain; 
+            box-sizing: border-box;
+}
+
+        .intro-text {
+            max-width: 700px;
+            text-align: center;
+            font-size: 1.2rem;
+            line-height: 1.6;
+            margin-bottom: 60px;
+            padding: 0 20px;
+        }
+
+        section {
+            width: 100%;
+            max-width: 900px;
+            margin-bottom: 50px;
+        }
+
+        h2 {
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            display: inline-block;
+        }
+
+        p {
+            margin-top:0;
+            margin-bottom:1rem;
+        }
+
+        .button-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+        }
+
+        .btn-rect {
+            background: #00a6ce;
+            border: var(--border-width) solid #000;
+            font-family: var(--main-font);
+            font-weight: 800;
+            font-size: 1.1rem;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: all 0.15s ease;
+            padding: 25px 40px; 
+            text-align: center;
+            display: block;
+        }
+
+        .btn-rect:hover {
+            background-color: #82be80;
+            color: #000;
+            transform: translate(-5px, -5px);
+            box-shadow: 8px 8px 0px 0px rgba(0,0,0,0.2);
+        }
+
+        .btn-rect:active {
+            transform: translate(0, 0);
+            box-shadow: none;
+        }
+
+        .logos {
+            margin-top: 1rem;
+            max-width: 600px;
+            padding-bottom: 1rem;
+        }
+
+    </style>
 </head>
 <body>
-    <h1>Plantilla para sitios estáticos</h1>
+
+    <div class="logo-container">
+        <img src="img/pescasaude-cabeceira.png" alt="Pesca Saúde" class="main-logo">
+    </div>
+<!--
+    <div class="intro-text">
+        <p>A prevención e o coidado da saúde supón incorporar hábitos alimenticios equilibrados. <strong>Pesca Saúde</strong> é un proxecto para a difusión dos beneficios do consumo de produtos pesqueiros e estilos de vida saudables para  o benestar da poboación. </p>
+        <p class="small"></p>
+    </div>
+-->
+    <section>
+        <h2>Recursos</h2>
+        <div class="button-grid">
+            <button class="btn-rect">Receitario</button>
+            <button class="btn-rect">Guía nutricional</button>
+        </div>
+    </section>
+
+    <section>
+        <h2>O proxecto</h2>
+        <p>Pesca Saúde é un proxecto de cooperación promovido polos Grupos de Acción Local do Sector Pesqueiro (GALP). Alíase coa Estratexia Galega de Saúde Comunitaria 2023-2027 no seu compromiso para o fortalecemento da saúde 
+da poboación e conta co apoio da Dirección Xeral de Saúde 
+Pública (Subdirección Xeral de Estilos de Vida 
+Saudables) da Consellaría de Sanidade.</p>
+        <h3>Máis información:</h3>
+        <div class="button-grid">
+            <button class="btn-rect">GALP Costa Sostible (grupo coordinador)</button>
+            <button class="btn-rect">GALP Ría de Vigo-A Guarda</button>
+            <button class="btn-rect">GALP Ría de Pontevedra</button>
+            <button class="btn-rect">GALP  Ría de Arousa</button>
+            <button class="btn-rect">GALP  Costa da Morte</button>
+            <button class="btn-rect">GALP Golfo Ártabro Sur e GALP A Mariña Ortegal</button>
+        </div>
+    </section>
+
+    <div class="logo-container logos">
+        <img src="img/logos-pescasaude.png" alt="Pesca Saúde" class="main-logo">
+    </div>
+
 </body>
 </html>
