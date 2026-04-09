@@ -30,6 +30,7 @@
         h1, h2, .bold {
             font-weight: 800;
             letter-spacing: 1px;
+            line-height: 1.15;
         }
 
         .logo-container {
@@ -71,27 +72,40 @@
         p {
             margin-top:0;
             margin-bottom:1rem;
+            line-height: 1.5;
         }
 
         .button-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 25px;
-        }
+    display: grid;
+    /* Usamos auto-fill em vez de auto-fit para que, se houver apenas um botão, 
+       ele não estique para ocupar a largura toda da página */
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 25px;
+}
+
+.button-grid a {
+    display: block;
+    width: 100%;
+    text-decoration: none; /* Garante que não haja sublinhados indesejados */
+}
 
         .btn-rect {
-            background: #00a6ce;
-            border: var(--border-width) solid #000;
-            font-family: var(--main-font);
-            font-weight: 800;
-            font-size: 1.1rem;
-            text-transform: uppercase;
-            cursor: pointer;
-            transition: all 0.15s ease;
-            padding: 25px 40px; 
-            text-align: center;
-            display: block;
-        }
+    width: 100%;          /* Ocupa toda a largura do <a> */
+    height: 100%;         /* Faz com que todos tenham a mesma altura se o texto quebrar */
+    box-sizing: border-box; /* Garante que o padding e a borda não quebrem o layout */
+    
+    background: #00a6ce;
+    border: var(--border-width) solid #000;
+    font-family: var(--main-font);
+    font-weight: 800;
+    font-size: 1.1rem;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.15s ease;
+    padding: 25px 40px; 
+    text-align: center;
+    display: block;
+}
 
         .btn-rect:hover {
             background-color: #82be80;
@@ -111,10 +125,6 @@
             padding-bottom: 1rem;
         }
 
-        a {
-            text-decoration: none;
-            color: #000;
-        }
 
         .pdf {
             font-weight: 200;
@@ -137,8 +147,8 @@
     <section>
         <h2>Recursos prácticos</h2>
         <div class="button-grid">
-            <button class="btn-rect"><a href="files/guia-pescasaude.pdf">Guía útil <span class="pdf">(PDF, 3Mb)</span></a></button>
-            <button class="btn-rect"><a href="files/receitas-pescasaude.pdf">Receitario <span class="pdf">(PDF, 9Mb)</span></a></button>
+            <a href="files/guia-pescasaude.pdf"><button class="btn-rect">Guía útil <br><span class="pdf">(PDF, 3Mb)</span></button></a>
+            <a href="files/receitas-pescasaude.pdf"><button class="btn-rect">Receitario <br><span class="pdf">(PDF, 9Mb)</span></button></a>
         </div>
     </section>
 
@@ -148,7 +158,7 @@
         <p> Consumir produtos pesqueiros é bo para ti e, con Pesca Saúde, tamén ten premio. Consigue descontos nos establecementos adheridos, participa en sorteos e gozar de demostracións de cociña en vivo. </p>
 
         <div class="button-grid">
-            <button class="btn-rect"><a href="files/participa-pescasaude.pdf">Como participar <span class="pdf">(PDF, 1Mb)</span></a></button>
+            <a href="files/participa-pescasaude.pdf"><button class="btn-rect">Como participar <br><span class="pdf">(PDF, 1Mb)</span></button></a>
         </div>
     </section>
 
@@ -157,13 +167,13 @@
         <p>Pesca Saúde é un proxecto de cooperación promovido polos <strong>Grupos de Acción Local do Sector Pesqueiro (GALP)</strong>. Alíase coa Estratexia Galega de Saúde Comunitaria 2023-2027 no seu compromiso para o fortalecemento da saúde da poboación e conta co apoio da Dirección Xeral de Saúde Pública (Subdirección Xeral de Estilos de Vida Saudables) da Consellaría de Sanidade.</p>
         <h3>Máis información:</h3>
         <div class="button-grid">
-            <button class="btn-rect"><a href="https://costasostible.com/">Costa Sostible</a></button>
-            <button class="btn-rect"><a href="https://galp.xunta.gal/ria-de-vigo-a-guarda">Ría de Vigo-A Guarda</a></button>
-            <button class="btn-rect"><a href="https://www.galpriadepontevedra.org/">Ría de Pontevedra</a></button>
-            <button class="btn-rect"><a href="https://galp.xunta.gal/ria-de-arousa">Ría de Arousa</a></button>
-            <button class="btn-rect"><a href="https://galp.xunta.gal/costa-da-morte">Costa da Morte</a></button>
-            <button class="btn-rect"><a href="https://galpartabrosur.com/">Golfo Ártabro Sur</a></button>
-            <button class="btn-rect"><a href="https://galp.xunta.gal/a-marina-ortegal">A Mariña Ortegal</a></button>
+            <a href="https://costasostible.com/"><button class="btn-rect">Costa Sostible</button></a>
+            <a href="https://galp.xunta.gal/ria-de-vigo-a-guarda"><button class="btn-rect">Ría de Vigo-A Guarda</button></a>
+            <a href="https://www.galpriadepontevedra.org/"><button class="btn-rect">Ría de Pontevedra</button></a>
+            <a href="https://galp.xunta.gal/ria-de-arousa"><button class="btn-rect">Ría de Arousa</button></a>
+            <a href="https://galp.xunta.gal/costa-da-morte"><button class="btn-rect">Costa da Morte</button></a>
+            <a href="https://galpartabrosur.com/"><button class="btn-rect">Golfo Ártabro Sur</button></a>
+            <a href="https://galp.xunta.gal/a-marina-ortegal"><button class="btn-rect">A Mariña Ortegal</button></a>
                   
         </div>
     </section>
