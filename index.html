@@ -157,28 +157,96 @@
             margin-top: 2rem;
         }
 
+        /* Layout de dos columnas adaptables */
+.two-column-container {
+    display: flex;
+    flex-direction: column; /* En móvil se apilan (una debajo de otra) */
+    gap: 25px;
+    width: 100%;
+}
+
+@media (min-width: 768px) {
+    .two-column-container {
+        flex-direction: row; /* En pantallas grandes van lado a lado */
+        align-items: flex-start;
+    }
+    
+    .col-text-table, .col-image {
+        flex: 1; /* Ocupan el 50% cada una */
+    }
+}
+
+/* Estilo para la imagen alineada con el diseño del sitio */
+.col-image img {
+    width: 100%;
+    height: auto;
+    display: block;
+    box-sizing: border-box;
+}
+
+/* Estilo para la tabla acorde al diseño general */
+.custom-table {
+    width: 100%;
+    border-collapse: collapse;
+    
+    border: var(--border-width) solid #000;
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+
+.custom-table th, .custom-table td {
+    padding: 12px;
+    border: 2px solid #000;
+    text-align: left;
+}
+
+.custom-table th {
+    background-color: #00a6ce;
+    font-weight: 800;
+    text-transform: uppercase;
+    font-size: 0.9rem;
+}
+
     </style>
 </head>
 <body>
 
     <div class="logo-container">
         <img src="img/pescasaude-cabeceira.png" alt="Pesca Saúde" class="main-logo">
-    </div>
-    
-    <section class="video">
-        <div style="padding:56.25% 0 0 0;position:relative;"><iframe src="https://player.vimeo.com/video/1183087457?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479" frameborder="0" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share" referrerpolicy="strict-origin-when-cross-origin" style="position:absolute;top:0;left:0;width:100%;height:100%;" title="PescaSaude_H264_20Mbps_COMPLETO"></iframe></div><script src="https://player.vimeo.com/api/player.js"></script>
-    </section>    
+    </div>    
+
 
     <section>
-        <h2>Pesca saúde nos mercados.</h2>
-        <p> Consumir produtos pesqueiros é bo para ti e, con Pesca Saúde, tamén ten premio. Consigue descontos nos establecementos adheridos, participa en sorteos e gozar de demostracións de cociña en vivo. </p>
-
-        <div class="button-grid">
-            <a href="files/establecementos-pescasaude.pdf"><button class="btn-rect"><img src="img/indicativo-pescasaude.png" alt="Establecementos adheridos">Establecementos adheridos <br><span class="pdf">(PDF, 1Mb)</span></button></a>
-            <a href="files/participa-pescasaude.pdf"><button class="btn-rect"><img src="img/participa-pescasaude.jpg" alt="Participa en Pesca Saúde">Como participar na campaña <br><span class="pdf">(PDF, 1Mb)</span></button></a>
-            <a href="files/pescasaude-sorteo.pdf"><button class="btn-rect"><img src="img/ganadoras-pescasaude.jpg" alt="Establecementos adheridos">Gañadores do sorteo<br><span class="pdf">(PDF, 1Mb)</span></button></a>
+    <h2>Obradoiros de 'batchcooking'</h2>
+    
+    <div class="two-column-container">
+        <!-- Columna 1: Texto y Tabla -->
+        <div class="col-text-table">
+            <p>Queres comer de forma máis saudable, aforrar tempo na cociña e incorporar produto pesqueiro á túa dieta? <strong>Aprende cos mellores profesionais</strong> a organizar sesións de cociñado para toda a semana, <strong>receitas e técnicas sinxelas para cociñar produtos do mar</strong> sen perder sabor nin propiedades, claves para saber que especies conservan mellor na neveira ou no conxelador, e trucos para <strong>reducir o desperdicio alimentario.</strong></p>            
+            <a href="https://docs.google.com/forms/d/e/1FAIpQLSfjZgWJKRGCeOvQ2tOH0NZ45GKbcNrtO9G1Mjv2Lyg4yziuDA/viewform?usp=dialog"><button class="btn-rect">Inscríbete<br></button></a>
+            <h3>Datas dispoñibles</h3>
+            <table class="custom-table">
+                <thead>
+                    <tr>
+                        <th>Lugar</th>
+                        <th>Datas</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Sada</strong> (Oficina Municipal de Información Xuvenil)</td>
+                        <td>Martes 22 e Mércores 23 de setembro de 17 a 21 h</td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
-    </section>
+
+        <!-- Columna 2: Imagen -->
+        <div class="col-image">
+            <img src="img/Batchcooking_xenerico.jpg" alt="Imaxe da campaña">
+        </div>
+    </div>
+</section>
 
     <section>
         <h2>Pesca saúde nos establecementos de restauración.</h2>
@@ -195,6 +263,10 @@
             <a href="files/guia-pescasaude.pdf"><button class="btn-rect"><img src="img/guia-pescasaude.jpg" alt="Portada da guía">Guía útil <br><span class="pdf">(PDF, 3Mb)</span></button></a>
             <a href="files/receitas-pescasaude.pdf"><button class="btn-rect"><img src="img/receitas-pescasaude.jpg" alt="Portada da guía">Receitario <br><span class="pdf">(PDF, 9Mb)</span></button></a>
         </div>
+    </section>
+
+    <section class="video">
+        <div style="padding:56.25% 0 0 0;position:relative;"><iframe src="https://player.vimeo.com/video/1183087457?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479" frameborder="0" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share" referrerpolicy="strict-origin-when-cross-origin" style="position:absolute;top:0;left:0;width:100%;height:100%;" title="PescaSaude_H264_20Mbps_COMPLETO"></iframe></div><script src="https://player.vimeo.com/api/player.js"></script>
     </section>
    
 
