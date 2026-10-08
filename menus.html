@@ -1,0 +1,750 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pesca Saúde. O noso mar faiche ben</title>
+    
+    <link rel="stylesheet" href="https://use.typekit.net/cfb3rae.css">
+
+    <style>
+        :root {
+            --bg-color:#c0ddbf; 
+            --border-width: 4px; 
+            --main-font: "area-normal", sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            font-family: var(--main-font);
+            font-weight: 400;
+            color: #000;
+            margin: 0;
+            padding: 20px 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        h1, h2, .bold {
+            letter-spacing: 1px;
+            line-height: 1.15;
+        }
+
+        .logo-container {
+            width: 100%;
+            max-width: 700px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .main-logo {
+            width: 100%;
+            object-fit: contain; 
+            box-sizing: border-box;
+        }
+
+        .intro-text {
+            max-width: 700px;
+            text-align: center;
+            font-size: 1.2rem;
+            line-height: 1.6;
+            margin-bottom: 60px;
+            padding: 0 20px;
+        }
+
+        section {
+            width: 100%;
+            max-width: 900px;
+            margin-bottom: 50px;
+        }
+
+        h1 {
+            font-weight: 900;
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            display: inline-block;
+        }
+       
+        
+        h2 {
+            font-weight: 600;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            display: inline-block;
+        }
+
+        p {
+            margin-top: 0;
+            margin-bottom: 1rem;
+            line-height: 1.5;
+        }
+
+        .lead {
+            font-size: 1.2rem;
+        }
+
+        .bold {
+            font-weight: 800;
+        }
+        
+        .button-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr; 
+            gap: 15px; 
+        }
+
+        /* Enlaces dentro del grid ocupan el 100% de la altura de la celda */
+        .button-grid a {
+            display: flex;
+            width: 100%;
+            height: 100%;
+            text-decoration: none; 
+            color: inherit;
+        }
+
+        .btn-rect {
+            width: 100%;
+            height: 100%;
+            box-sizing: border-box;
+            background: #82be80;
+            border: var(--border-width) solid #000;
+            font-family: var(--main-font);
+            font-weight: 800;
+            font-size: 0.9rem; 
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: all 0.15s ease;
+            padding: 15px 10px; 
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 120px; 
+        }
+
+        @media (min-width: 600px) {
+            .button-grid {
+                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+                gap: 25px;
+            }
+            
+            .btn-rect {
+                font-size: 1.1rem;
+                padding: 25px 40px;
+            }
+        }
+
+        .btn-rect img {
+            display: block;          
+            margin: 0 auto 15px;    
+            width: 100%;           
+            object-fit: cover;      
+        }
+
+        .btn-rect:hover {
+            background-color: #82be80;
+            color: #000;
+            transform: translate(-5px, -5px);
+            box-shadow: 8px 8px 0px 0px rgba(0,0,0,0.2);
+        }
+
+        .btn-rect:active {
+            transform: translate(0, 0);
+            box-shadow: none;
+        }
+
+        /* --- Estilos para la sección de Restaurantes y Filtros --- */
+        
+        .filter-container {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-bottom: 25px;
+            margin-top: 2rem;
+            width: 100%;
+        }
+
+        @media (min-width: 600px) {
+            .filter-container {
+                flex-direction: row;
+            }
+        }
+
+        .filter-input {
+            flex: 1;
+            padding: 12px 15px;
+            font-family: var(--main-font);
+            font-weight: 600;
+            font-size: 0.95rem;
+            border: var(--border-width) solid #000;
+            background-color: #fff;
+            box-sizing: border-box;
+            outline: none;
+        }
+
+        .filter-input:focus {
+            background-color: #f0fdf4;
+            border-color: #000;
+        }
+
+        .restaurant-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 15px;
+        }
+
+        @media (min-width: 600px) {
+            .restaurant-grid {
+                grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+                gap: 20px;
+            }
+        }
+
+        .btn-rect-small {
+            min-height: 85px;
+            padding: 12px 15px;
+            font-size: 0.85rem;
+        }
+
+        .restaurant-name {
+            font-weight: 800;
+            font-size: 1.15rem;
+            text-transform: uppercase;
+            margin-bottom: 4px;
+            line-height: 1.25;
+        }
+
+        /* Estilo simplificado sin fondo ni borde */
+        .restaurant-concello {
+            font-weight: 600;
+            font-size: 0.82rem;
+            text-transform: none;
+            margin-top: 2px;
+            opacity: 0.85;
+        }
+
+        .no-results {
+            display: none;
+            text-align: center;
+            font-weight: 800;
+            font-size: 1.1rem;
+            padding: 30px;
+            width: 100%;
+            grid-column: 1 / -1;
+        }
+
+        .logos {
+            margin-top: 1rem;
+            max-width: 600px;
+            padding-bottom: 1rem;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="logo-container">
+          <a href="index.html"><img src="img/pescasaude-cabeceira-restaurantes.png" alt="Pesca Saúde" class="main-logo"></a>  
+    </div>   
+
+    <section>
+        <h1>Come o mar, come saúde.</h1>
+        <p class="lead">Pide o <strong>menú ou suxestións Pesca Saúde</strong> nos restaurantes adheridos e descubre o ben que che poden facer os produtos do noso mar.  Do 15 de outubro ao 15 de novembro de 2026</p>
+
+        <!-- Filtros de búsqueda -->
+        <div class="filter-container">
+            <input type="text" id="search-name" class="filter-input" placeholder="Buscar por restaurante...">
+            <select id="search-concello" class="filter-input">
+                <option value="">Todos os concellos</option>
+                <option value="A Coruña">A Coruña</option>
+                <option value="A Guarda">A Guarda</option>
+                <option value="A Illa de Arousa">A Illa de Arousa</option>
+                <option value="A Pobra do Caramiñal">A Pobra do Caramiñal</option>
+                <option value="Arteixo">Arteixo</option>
+                <option value="Baiona">Baiona</option>
+                <option value="Bergondo">Bergondo</option>
+                <option value="Bueu">Bueu</option>
+                <option value="Burela">Burela</option>
+                <option value="Camariñas">Camariñas</option>
+                <option value="Cambados">Cambados</option>
+                <option value="Cambre">Cambre</option>
+                <option value="Cangas">Cangas</option>
+                <option value="Carballo">Carballo</option>
+                <option value="Carnota">Carnota</option>
+                <option value="Cedeira">Cedeira</option>
+                <option value="Celeiro">Celeiro</option>
+                <option value="Cervo">Cervo</option>
+                <option value="Corcubión">Corcubión</option>
+                <option value="Fisterra">Fisterra</option>
+                <option value="Foz">Foz</option>
+                <option value="Malpica">Malpica</option>
+                <option value="Marín">Marín</option>
+                <option value="Meaño">Meaño</option>
+                <option value="Muros">Muros</option>
+                <option value="Muxía">Muxía</option>
+                <option value="Nigrán">Nigrán</option>
+                <option value="O Grove">O Grove</option>
+                <option value="Oia">Oia</option>
+                <option value="Oleiros">Oleiros</option>
+                <option value="Outes">Outes</option>
+                <option value="Poio">Poio</option>
+                <option value="Pontevedra">Pontevedra</option>
+                <option value="Portonovo">Portonovo</option>
+                <option value="Portosín">Portosín</option>
+                <option value="Razo, Carballo">Razo, Carballo</option>
+                <option value="Redondela">Redondela</option>
+                <option value="Rianxo">Rianxo</option>
+                <option value="Ribadeo">Ribadeo</option>
+                <option value="Ribadumia">Ribadumia</option>
+                <option value="Ribeira">Ribeira</option>
+                <option value="Sada">Sada</option>
+                <option value="Sanxenxo">Sanxenxo</option>
+                <option value="Valdoviño">Valdoviño</option>
+                <option value="Vilagarcía">Vilagarcía</option>
+                <option value="Xove">Xove</option>
+            </select>
+        </div>
+
+        <!-- Grid de Restaurantes ordenados alfabéticamente -->
+        <div class="button-grid restaurant-grid" id="restaurants-container">
+            <a href="menus/PescaSaude_71_casa_da_henriqueta.pdf" target="_blank" class="restaurant-card" data-name="A Casa da Henriqueta" data-concello="Oia">
+                <button class="btn-rect btn-rect-small">
+                    <span class="restaurant-name">A Casa da Henriqueta</span>
+                    <span class="restaurant-concello">Oia</span>
+                </button>
+            </a>
+            <a href="menus/PescaSaude_41_casa_do_tella_e_rosalia.pdf" target="_blank" class="restaurant-card" data-name="A Casa do Tella e Rosalía" data-concello="Portosín">
+                <button class="btn-rect btn-rect-small">
+                    <span class="restaurant-name">A Casa do Tella e Rosalía</span>
+                    <span class="restaurant-concello">Portosín</span>
+                </button>
+            </a>
+            <a href="menus/PescaSaude_54_a_centoleira.pdf" target="_blank" class="restaurant-card" data-name="A Centoleira" data-concello="Bueu">
+                <button class="btn-rect btn-rect-small">
+                    <span class="restaurant-name">A Centoleira</span>
+                    <span class="restaurant-concello">Bueu</span>
+                </button>
+            </a>
+            <a href="menus/PescaSaude_01_cocina_rocio.pdf" target="_blank" class="restaurant-card" data-name="A Cociña de Rocío" data-concello="Burela">
+                <button class="btn-rect btn-rect-small">
+                    <span class="restaurant-name">A Cociña de Rocío</span>
+                    <span class="restaurant-concello">Burela</span>
+                </button>
+            </a>
+            <a href="menus/PescaSaude_30-furna.pdf" target="_blank" class="restaurant-card" data-name="A Furna" data-concello="Muxía">
+                <button class="btn-rect btn-rect-small">
+                    <span class="restaurant-name">A Furna</span>
+                    <span class="restaurant-concello">Muxía</span>
+                </button>
+            </a>
+            <a href="menus/PescaSaude_36_muradana.pdf" target="_blank" class="restaurant-card" data-name="A Muradana" data-concello="Muros">
+                <button class="btn-rect btn-rect-small">
+                    <span class="restaurant-name">A Muradana</span>
+                    <span class="restaurant-concello">Muros</span>
+                </button>
+            </a>
+            <a href="menus/PescaSaude_46_airinos.pdf" target="_blank" class="restaurant-card" data-name="Airiños Restaurante" data-concello="O Grove">
+                <button class="btn-rect btn-rect-small">
+                    <span class="restaurant-name">Airiños Restaurante</span>
+                    <span class="restaurant-concello">O Grove</span>
+                </button>
+            </a>
+            <a href="menus/PescaSaude_68_plaza.pdf" target="_blank" class="restaurant-card" data-name="Bar Restaurante Plaza" data-concello="Cangas">
+                <button class="btn-rect btn-rect-small">
+                    <span class="restaurant-name">Bar Restaurante Plaza</span>
+                    <span class="restaurant-concello">Cangas</span>
+                </button>
+            </a>
+            <a href="menus/PescaSaude_42_braseria-salga.pdf" target="_blank" class="restaurant-card" data-name="Brasería Salga" data-concello="A Illa de Arousa">
+                <button class="btn-rect btn-rect-small">
+                    <span class="restaurant-name">Brasería Salga</span>
+                    <span class="restaurant-concello">A Illa de Arousa</span>
+                </button>
+            </a>
+            <a href="menus/PescaSaude_16_buxo.pdf" target="_blank" class="restaurant-card" data-name="Buxo Taberna" data-concello="Cambre">
+                <button class="btn-rect btn-rect-small">
+                    <span class="restaurant-name">Buxo Taberna</span>
+                    <span class="restaurant-concello">Cambre</span>
+                </button>
+            </a>
+            <a href="menus/PescaSaude_25_baldayo.pdf" target="_blank" class="restaurant-card" data-name="Camping Baldayo" data-concello="Carballo">
+                <button class="btn-rect btn-rect-small">
+                    <span class="restaurant-name">Camping Baldayo</span>
+                    <span class="restaurant-concello">Carballo</span>
+                </button>
+            </a>
+            <a href="menus/PescaSaude_05_casa_damian.pdf" target="_blank" class="restaurant-card" data-name="Casa Damián" data-concello="Foz">
+                <button class="btn-rect btn-rect-small">
+                    <span class="restaurant-name">Casa Damián</span>
+                    <span class="restaurant-concello">Foz</span>
+                </button>
+            </a>
+            <a href="menus/PescaSaude_37_casa_o_peto.pdf" target="_blank" class="restaurant-card" data-name="Casa O Peto" data-concello="Outes">
+                <button class="btn-rect btn-rect-small">
+                    <span class="restaurant-name">Casa O Peto</span>
+                    <span class="restaurant-concello">Outes</span>
+                </button>
+            </a>
+            <a href="menus/PescaSaude_55_e_restaurante.pdf" target="_blank" class="restaurant-card" data-name="É Restaurante" data-concello="Marín">
+                <button class="btn-rect btn-rect-small">
+                    <span class="restaurant-name">É Restaurante</span>
+                    <span class="restaurant-concello">Marín</span>
+                </button>
+            </a>
+            <a href="menus/PescaSaude_58_cafetin.pdf" target="_blank" class="restaurant-card" data-name="El Cafetín" data-concello="Pontevedra">
+                <button class="btn-rect btn-rect-small">
+                    <span class="restaurant-name">El Cafetín</span>
+                    <span class="restaurant-concello">Pontevedra</span>
+                </button>
+            </a>
+            <a href="menus/PescaSaude_11_alberto.pdf" target="_blank" class="restaurant-card" data-name="El de Alberto" data-concello="A Coruña">
+                <button class="btn-rect btn-rect-small">
+                    <span class="restaurant-name">El de Alberto</span>
+                    <span class="restaurant-concello">A Coruña</span>
+                </button>
+            </a>
+            <a href="menus/PescaSaude_07_el_oviedo.pdf" target="_blank" class="restaurant-card" data-name="El Oviedo" data-concello="Ribadeo">
+                <button class="btn-rect btn-rect-small">
+                    <span class="restaurant-name">El Oviedo</span>
+                    <span class="restaurant-concello">Ribadeo</span>
+                </button>
+            </a>
+            <a href="menus/PescaSaude_24-espazo_nature.pdf" target="_blank" class="restaurant-card" data-name="Espazo Nature" data-concello="Razo, Carballo">
+                <button class="btn-rect btn-rect-small">
+                    <span class="restaurant-name">Espazo Nature</span>
+                    <span class="restaurant-concello">Razo, Carballo</span>
+                </button>
+            </a>
+            <a href="menus/PescaSaude_35_semaforo.pdf" target="_blank" class="restaurant-card" data-name="Hotel O Semáforo de Fisterra" data-concello="Fisterra">
+                <button class="btn-rect btn-rect-small">
+                    <span class="restaurant-name">Hotel O Semáforo de Fisterra</span>
+                    <span class="restaurant-concello">Fisterra</span>
+                </button>
+            </a>
+            <a href="menus/PescaSaude_12_la_marina.pdf" target="_blank" class="restaurant-card" data-name="La Marina by María" data-concello="A Coruña">
+                <button class="btn-rect btn-rect-small">
+                    <span class="restaurant-name">La Marina by María</span>
+                    <span class="restaurant-concello">A Coruña</span>
+                </button>
+            </a>
+            <a href="menus/PescaSaude_26_ratona.pdf" target="_blank" class="restaurant-card" data-name="La Ratona" data-concello="Carballo">
+                <button class="btn-rect btn-rect-small">
+                    <span class="restaurant-name">La Ratona</span>
+                    <span class="restaurant-concello">Carballo</span>
+                </button>
+            </a>
+            <a href="menus/PescaSaude_20_terraza.pdf" target="_blank" class="restaurant-card" data-name="La Terraza" data-concello="Sada">
+                <button class="btn-rect btn-rect-small">
+                    <span class="restaurant-name">La Terraza</span>
+                    <span class="restaurant-concello">Sada</span>
+                </button>
+            </a>
+            <a href="menus/PescaSaude_31-mar_da_morosa.pdf" target="_blank" class="restaurant-card" data-name="Mar da Morosa" data-concello="Carnota">
+                <button class="btn-rect btn-rect-small">
+                    <span class="restaurant-name">Mar da Morosa</span>
+                    <span class="restaurant-concello">Carnota</span>
+                </button>
+            </a>
+            <a href="menus/PescaSaude_32_mercamaris.pdf" target="_blank" class="restaurant-card" data-name="Mercamaris Taberna Mariñeira" data-concello="Corcubión">
+                <button class="btn-rect btn-rect-small">
+                    <span class="restaurant-name">Mercamaris Taberna Mariñeira</span>
+                    <span class="restaurant-concello">Corcubión</span>
+                </button>
+            </a>
+            <a href="menus/PescaSaude_17_moncho.pdf" target="_blank" class="restaurant-card" data-name="Mesón Restaurante Moncho" data-concello="Cambre">
+                <button class="btn-rect btn-rect-small">
+                    <span class="restaurant-name">Mesón Restaurante Moncho</span>
+                    <span class="restaurant-concello">Cambre</span>
+                </button>
+            </a>
+            <a href="menus/PescaSaude_02_vila_vella.pdf" target="_blank" class="restaurant-card" data-name="Mesón-Restaurante Vila Vella" data-concello="Cedeira">
+                <button class="btn-rect btn-rect-small">
+                    <span class="restaurant-name">Mesón-Restaurante Vila Vella</span>
+                    <span class="restaurant-concello">Cedeira</span>
+                </button>
+            </a>
+            <a href="menus/PescaSaude_04_almacen.pdf" target="_blank" class="restaurant-card" data-name="O Almacén Hotel Restaurante" data-concello="Cervo">
+                <button class="btn-rect btn-rect-small">
+                    <span class="restaurant-name">O Almacén Hotel Restaurante</span>
+                    <span class="restaurant-concello">Cervo</span>
+                </button>
+            </a>
+            <a href="menus/PescaSaude_45_o_bo_padal.pdf" target="_blank" class="restaurant-card" data-name="O Bo Paladar" data-concello="Cambados">
+                <button class="btn-rect btn-rect-small">
+                    <span class="restaurant-name">O Bo Paladar</span>
+                    <span class="restaurant-concello">Cambados</span>
+                </button>
+            </a>
+            <a href="menus/PescaSaude_65_cangrexal.pdf" target="_blank" class="restaurant-card" data-name="O Cangrexal" data-concello="A Guarda">
+                <button class="btn-rect btn-rect-small">
+                    <span class="restaurant-name">O Cangrexal</span>
+                    <span class="restaurant-concello">A Guarda</span>
+                </button>
+            </a>
+            <a href="menus/PescaSaude_56_muino_da_chanca.pdf" target="_blank" class="restaurant-card" data-name="O Muíño da Chanca" data-concello="Meaño">
+                <button class="btn-rect btn-rect-small">
+                    <span class="restaurant-name">O Muíño da Chanca</span>
+                    <span class="restaurant-concello">Meaño</span>
+                </button>
+            </a>
+            <a href="menus/PescaSaude_60_pescador.pdf" target="_blank" class="restaurant-card" data-name="O Pescador" data-concello="Portonovo">
+                <button class="btn-rect btn-rect-small">
+                    <span class="restaurant-name">O Pescador</span>
+                    <span class="restaurant-concello">Portonovo</span>
+                </button>
+            </a>
+            <a href="menus/PescaSaude_39_taboleiro.pdf" target="_blank" class="restaurant-card" data-name="O Taboleiro" data-concello="Outes">
+                <button class="btn-rect btn-rect-small">
+                    <span class="restaurant-name">O Taboleiro</span>
+                    <span class="restaurant-concello">Outes</span>
+                </button>
+            </a>
+            <a href="menus/PescaSaude_50_xardin_do_pedro.pdf" target="_blank" class="restaurant-card" data-name="O Xardín de Pedro" data-concello="Ribeira">
+                <button class="btn-rect btn-rect-small">
+                    <span class="restaurant-name">O Xardín de Pedro</span>
+                    <span class="restaurant-concello">Ribeira</span>
+                </button>
+            </a>
+            <a href="menus/PescaSaude_67_pandemillo.pdf" target="_blank" class="restaurant-card" data-name="Pandemillo Taberna Mariñeira" data-concello="Cangas">
+                <button class="btn-rect btn-rect-small">
+                    <span class="restaurant-name">Pandemillo Taberna Mariñeira</span>
+                    <span class="restaurant-concello">Cangas</span>
+                </button>
+            </a>
+            <a href="menus/PescaSaude_61_a_loba.pdf" target="_blank" class="restaurant-card" data-name="Pepa A Loba Tapería" data-concello="Portonovo">
+                <button class="btn-rect btn-rect-small">
+                    <span class="restaurant-name">Pepa A Loba Tapería</span>
+                    <span class="restaurant-concello">Portonovo</span>
+                </button>
+            </a>
+            <a href="menus/PescaSaude_40-pepe_do_coxo.pdf" target="_blank" class="restaurant-card" data-name="Pepe do Coxo" data-concello="Outes">
+                <button class="btn-rect btn-rect-small">
+                    <span class="restaurant-name">Pepe do Coxo</span>
+                    <span class="restaurant-concello">Outes</span>
+                </button>
+            </a>
+            <a href="menus/PescaSaude_66_recuncho_marineiro.pdf" target="_blank" class="restaurant-card" data-name="Recuncho Mariñeiro" data-concello="Baiona">
+                <button class="btn-rect btn-rect-small">
+                    <span class="restaurant-name">Recuncho Mariñeiro</span>
+                    <span class="restaurant-concello">Baiona</span>
+                </button>
+            </a>
+            <a href="menus/PescaSaude_70_los_abetos.pdf" target="_blank" class="restaurant-card" data-name="Restaurante Asador Los Abetos" data-concello="Nigrán">
+                <button class="btn-rect btn-rect-small">
+                    <span class="restaurant-name">Restaurante Asador Los Abetos</span>
+                    <span class="restaurant-concello">Nigrán</span>
+                </button>
+            </a>
+            <a href="menus/PescaSaude_18_cortina-lorbe.pdf" target="_blank" class="restaurant-card" data-name="Restaurante A’cortiña de Lorbé" data-concello="Oleiros">
+                <button class="btn-rect btn-rect-small">
+                    <span class="restaurant-name">Restaurante A’cortiña de Lorbé</span>
+                    <span class="restaurant-concello">Oleiros</span>
+                </button>
+            </a>
+            <a href="menus/PescaSaude_47_beiramar.pdf" target="_blank" class="restaurant-card" data-name="Restaurante Beiramar" data-concello="O Grove">
+                <button class="btn-rect btn-rect-small">
+                    <span class="restaurant-name">Restaurante Beiramar</span>
+                    <span class="restaurant-concello">O Grove</span>
+                </button>
+            </a>
+            <a href="menus/PescaSaude_03_boa_vista.pdf" target="_blank" class="restaurant-card" data-name="Restaurante Boa Vista" data-concello="Celeiro">
+                <button class="btn-rect btn-rect-small">
+                    <span class="restaurant-name">Restaurante Boa Vista</span>
+                    <span class="restaurant-concello">Celeiro</span>
+                </button>
+            </a>
+            <a href="menus/PescaSaude_63_casa-valladeiro.pdf" target="_blank" class="restaurant-card" data-name="Restaurante Casa Valladeiro" data-concello="A Guarda">
+                <button class="btn-rect btn-rect-small">
+                    <span class="restaurant-name">Restaurante Casa Valladeiro</span>
+                    <span class="restaurant-concello">A Guarda</span>
+                </button>
+            </a>
+            <a href="menus/PescaSaude_34_bayonnaise.pdf" target="_blank" class="restaurant-card" data-name="Restaurante La Bayonnaise 1803" data-concello="Fisterra">
+                <button class="btn-rect btn-rect-small">
+                    <span class="restaurant-name">Restaurante La Bayonnaise 1803</span>
+                    <span class="restaurant-concello">Fisterra</span>
+                </button>
+            </a>
+            <a href="menus/PescaSaude_51_la_salada.pdf" target="_blank" class="restaurant-card" data-name="Restaurante La Salada" data-concello="Vilagarcía">
+                <button class="btn-rect btn-rect-small">
+                    <span class="restaurant-name">Restaurante La Salada</span>
+                    <span class="restaurant-concello">Vilagarcía</span>
+                </button>
+            </a>
+            <a href="menus/PescaSaude_19_licar.pdf" target="_blank" class="restaurant-card" data-name="Restaurante Licar" data-concello="Sada">
+                <button class="btn-rect btn-rect-small">
+                    <span class="restaurant-name">Restaurante Licar</span>
+                    <span class="restaurant-concello">Sada</span>
+                </button>
+            </a>
+            <a href="menus/PescaSaude_64_trasmallo.pdf" target="_blank" class="restaurant-card" data-name="Restaurante Marisquería Trasmallo" data-concello="A Guarda">
+                <button class="btn-rect btn-rect-small">
+                    <span class="restaurant-name">Restaurante Marisquería Trasmallo</span>
+                    <span class="restaurant-concello">A Guarda</span>
+                </button>
+            </a>
+            <a href="menus/PescaSaude_53_nordes.pdf" target="_blank" class="restaurant-card" data-name="Restaurante Nordés" data-concello="Bueu">
+                <button class="btn-rect btn-rect-small">
+                    <span class="restaurant-name">Restaurante Nordés</span>
+                    <span class="restaurant-concello">Bueu</span>
+                </button>
+            </a>
+            <a href="menus/PescaSaude_57_o_peirao.pdf" target="_blank" class="restaurant-card" data-name="Restaurante O Peirao" data-concello="Poio">
+                <button class="btn-rect btn-rect-small">
+                    <span class="restaurant-name">Restaurante O Peirao</span>
+                    <span class="restaurant-concello">Poio</span>
+                </button>
+            </a>
+            <a href="menus/PescaSaude_06_rincon_mis.pdf" target="_blank" class="restaurant-card" data-name="Restaurante O Rincon do Mis" data-concello="Foz">
+                <button class="btn-rect btn-rect-small">
+                    <span class="restaurant-name">Restaurante O Rincon do Mis</span>
+                    <span class="restaurant-concello">Foz</span>
+                </button>
+            </a>
+            <a href="menus/PescaSaude_10_pepe.pdf" target="_blank" class="restaurant-card" data-name="Restaurante Pepe" data-concello="Xove">
+                <button class="btn-rect btn-rect-small">
+                    <span class="restaurant-name">Restaurante Pepe</span>
+                    <span class="restaurant-concello">Xove</span>
+                </button>
+            </a>
+            <a href="menus/PescaSaude_14_pirixel.pdf" target="_blank" class="restaurant-card" data-name="Restaurante Pirixel" data-concello="Arteixo">
+                <button class="btn-rect btn-rect-small">
+                    <span class="restaurant-name">Restaurante Pirixel</span>
+                    <span class="restaurant-concello">Arteixo</span>
+                </button>
+            </a>
+            <a href="menus/PescaSaude_22-praia-cansorro.pdf" target="_blank" class="restaurant-card" data-name="Restaurante Praia do Cansorro" data-concello="Camariñas">
+                <button class="btn-rect btn-rect-small">
+                    <span class="restaurant-name">Restaurante Praia do Cansorro</span>
+                    <span class="restaurant-concello">Camariñas</span>
+                </button>
+            </a>
+            <a href="menus/PescaSaude_38_riso_o_freixo.pdf" target="_blank" class="restaurant-card" data-name="Restaurante Rios O Freixo" data-concello="Outes">
+                <button class="btn-rect btn-rect-small">
+                    <span class="restaurant-name">Restaurante Rios O Freixo</span>
+                    <span class="restaurant-concello">Outes</span>
+                </button>
+            </a>
+            <a href="menus/PescaSaude_62_sabino.pdf" target="_blank" class="restaurant-card" data-name="Restaurante Sabino" data-concello="Sanxenxo">
+                <button class="btn-rect btn-rect-small">
+                    <span class="restaurant-name">Restaurante Sabino</span>
+                    <span class="restaurant-concello">Sanxenxo</span>
+                </button>
+            </a>
+            <a href="menus/PescaSaude_27_san-francisco.pdf" target="_blank" class="restaurant-card" data-name="Restaurante San Francisco" data-concello="Malpica">
+                <button class="btn-rect btn-rect-small">
+                    <span class="restaurant-name">Restaurante San Francisco</span>
+                    <span class="restaurant-concello">Malpica</span>
+                </button>
+            </a>
+            <a href="menus/PescaSaude_15_san_isidro.pdf" target="_blank" class="restaurant-card" data-name="Restaurante San Isidro" data-concello="Bergondo">
+                <button class="btn-rect btn-rect-small">
+                    <span class="restaurant-name">Restaurante San Isidro</span>
+                    <span class="restaurant-concello">Bergondo</span>
+                </button>
+            </a>
+            <a href="menus/PescaSaude_08_san_miguel.pdf" target="_blank" class="restaurant-card" data-name="Restaurante San Miguel" data-concello="Ribadeo">
+                <button class="btn-rect btn-rect-small">
+                    <span class="restaurant-name">Restaurante San Miguel</span>
+                    <span class="restaurant-concello">Ribadeo</span>
+                </button>
+            </a>
+            <a href="menus/PescaSaude_23-serpent.pdf" target="_blank" class="restaurant-card" data-name="Restaurante Serpent" data-concello="Camariñas">
+                <button class="btn-rect btn-rect-small">
+                    <span class="restaurant-name">Restaurante Serpent</span>
+                    <span class="restaurant-concello">Camariñas</span>
+                </button>
+            </a>
+            <a href="menus/PescaSaude_43_sisal.pdf" target="_blank" class="restaurant-card" data-name="Restaurante Sisal by Chicolino" data-concello="A Pobra do Caramiñal">
+                <button class="btn-rect btn-rect-small">
+                    <span class="restaurant-name">Restaurante Sisal by Chicolino</span>
+                    <span class="restaurant-concello">A Pobra do Caramiñal</span>
+                </button>
+            </a>
+            <a href="menus/PescaSaude_48_tanxil.pdf" target="_blank" class="restaurant-card" data-name="Restaurante Tanxil" data-concello="Rianxo">
+                <button class="btn-rect btn-rect-small">
+                    <span class="restaurant-name">Restaurante Tanxil</span>
+                    <span class="restaurant-concello">Rianxo</span>
+                </button>
+            </a>
+            <a href="menus/PescaSaude_49_tio_benito.pdf" target="_blank" class="restaurant-card" data-name="Restaurante Tío Benito" data-concello="Ribadumia">
+                <button class="btn-rect btn-rect-small">
+                    <span class="restaurant-name">Restaurante Tío Benito</span>
+                    <span class="restaurant-concello">Ribadumia</span>
+                </button>
+            </a>
+            <a href="menus/PescaSaude_28-son-de-mar.pdf" target="_blank" class="restaurant-card" data-name="Son de Mar" data-concello="Muxía">
+                <button class="btn-rect btn-rect-small">
+                    <span class="restaurant-name">Son de Mar</span>
+                    <span class="restaurant-concello">Muxía</span>
+                </button>
+            </a>
+            <a href="menus/PescaSaude_09_puntal.pdf" target="_blank" class="restaurant-card" data-name="Taberna do Puntal" data-concello="Valdoviño">
+                <button class="btn-rect btn-rect-small">
+                    <span class="restaurant-name">Taberna do Puntal</span>
+                    <span class="restaurant-concello">Valdoviño</span>
+                </button>
+            </a>
+            <a href="menus/PescaSaude_72_vilarosa.pdf" target="_blank" class="restaurant-card" data-name="Vilarosa Restaurante Tapería" data-concello="Redondela">
+                <button class="btn-rect btn-rect-small">
+                    <span class="restaurant-name">Vilarosa Restaurante Tapería</span>
+                    <span class="restaurant-concello">Redondela</span>
+                </button>
+            </a>
+
+            <div id="no-results" class="no-results">Non se atoparon restaurantes.</div>
+        </div>
+    </section>
+
+    <div class="logo-container logos">
+        <img src="img/logos-pescasaude.png" alt="Pesca Saúde" class="main-logo">
+    </div>
+
+    <!-- Script para filtrado dinámico -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const searchInput = document.getElementById('search-name');
+            const concelloSelect = document.getElementById('search-concello');
+            const cards = document.querySelectorAll('.restaurant-card');
+            const noResults = document.getElementById('no-results');
+
+            function normalizeText(str) {
+                return str.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase();
+            }
+
+            function filterRestaurants() {
+                const nameQuery = normalizeText(searchInput.value);
+                const selectedConcello = concelloSelect.value;
+                let visibleCount = 0;
+
+                cards.forEach(card => {
+                    const name = normalizeText(card.getAttribute('data-name'));
+                    const concello = card.getAttribute('data-concello');
+
+                    const matchesName = name.includes(nameQuery);
+                    const matchesConcello = selectedConcello === '' || concello === selectedConcello;
+
+                    if (matchesName && matchesConcello) {
+                        card.style.display = 'flex';
+                        visibleCount++;
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+
+                if (visibleCount === 0) {
+                    noResults.style.display = 'block';
+                } else {
+                    noResults.style.display = 'none';
+                }
+            }
+
+            searchInput.addEventListener('input', filterRestaurants);
+            concelloSelect.addEventListener('change', filterRestaurants);
+        });
+    </script>
+</body>
+</html>
